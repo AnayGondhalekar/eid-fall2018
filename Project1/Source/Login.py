@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# Owner: Anay Gondhalekar
 # Form implementation generated from reading ui file 'Login.ui'
 #
 # Created by: PyQt5 UI code generator 5.7
@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from myapp import Ui_MainWindow
-
+#Class to create the window
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -26,15 +26,16 @@ class Ui_Dialog(object):
         self.buttonBox.setObjectName("buttonBox")
 
         self.retranslateUi(Dialog)
-        self.buttonBox.clicked.connect(Dialog.accept)
-        self.buttonBox.accepted.connect(self.getkey)
+        self.buttonBox.clicked.connect(Dialog.accept) 
+        self.buttonBox.accepted.connect(self.getkey) #On entering password call function to check it
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.label.setText(_translate("Dialog", "Enter the password:"))
-    
+        
+    #Make a message box class to display Warning error
     def showMessageBox(self,title,message):
         msgBox = QtWidgets.QMessageBox()
         msgBox.setIcon(QtWidgets.QMessageBox.Warning)
@@ -43,6 +44,7 @@ class Ui_Dialog(object):
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec_()
     
+    #getkey function to check the password
     def getkey(self):
         _translate = QtCore.QCoreApplication.translate
         password = self.lineEdit.text()
@@ -53,9 +55,9 @@ class Ui_Dialog(object):
             self.welcomeWindow.show()
         else:
             self.showMessageBox('Warning','Invalid Password')
-        
+      #Credits: https://www.youtube.com/watch?v=Sf-Vr-1q5UA   
 
-
+#Main function
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
