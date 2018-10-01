@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(40, 60, 101, 21))
+        self.label.setGeometry(QtCore.QRect(50, 60, 101, 21))
         font = QtGui.QFont()
         font.setFamily("FreeSans")
         font.setItalic(True)
@@ -99,6 +99,22 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(230, 370, 51, 21))
+        font = QtGui.QFont()
+        font.setFamily("FreeSans")
+        font.setItalic(True)
+        self.label_6.setFont(font)
+        self.label_6.setObjectName("label_6")
+        self.lineEdit_5 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_5.setGeometry(QtCore.QRect(280, 360, 301, 33))
+        font = QtGui.QFont()
+        font.setFamily("DejaVu Sans")
+        font.setBold(True)
+        font.setItalic(True)
+        font.setWeight(75)
+        self.lineEdit_5.setFont(font)
+        self.lineEdit_5.setObjectName("lineEdit_5")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 640, 27))
@@ -121,7 +137,8 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "Sensor Connectivity:"))
         self.label_3.setText(_translate("MainWindow", "Last Refreshed at:"))
         self.label_5.setText(_translate("MainWindow", "Anay\'s Temperature & Humidity meter"))
-        
+        self.label_6.setText(_translate("MainWindow", "Alarm:"))
+
     def getTempHum(self):
         _translate = QtCore.QCoreApplication.translate
         sensor = Adafruit_DHT.DHT22
@@ -133,7 +150,21 @@ class Ui_MainWindow(object):
             self.lineEdit.setText(_translate("MainWindow", temp1))
             self.lineEdit_2.setText(_translate("MainWindow", hum1))
             self.lineEdit_3.setText(_translate("MainWindow", "Sensor Connected!"))
-            self.lineEdit_4.setText(QtCore.QDateTime.currentDateTime().toString())  
+            self.lineEdit_4.setText(QtCore.QDateTime.currentDateTime().toString())
+            if temperature > 25 and humidity > 40:
+                self.lineEdit_5.setText(_translate("MainWindow", "It's hot!"))
+            elif temperature > 25 and humidity < 40:
+                self.lineEdit_5.setText(_translate("MainWindow", "It's hot and dry!"))
+            elif temperature < 25 and temperature > 15 and humidity < 40:
+                self.lineEdit_5.setText(_translate("MainWindow", "It's dry!"))
+            elif temperature < 15 and humidity > 40:
+                self.lineEdit_5.setText(_translate("MainWindow", "It's cold!"))
+            elif temperature < 15 and humidity < 40:
+                self.lineEdit_5.setText(_translate("MainWindow", "It's cold and dry!"))
+            else:
+                self.lineEdit_5.setText(_translate("MainWindow", "Don't worry,it's perfect!"))
+            
+            
         else:
             humidity, temperature = Adafruit_DHT.read(sensor, pin)
             if humidity is None and temperature is None:
@@ -141,15 +172,28 @@ class Ui_MainWindow(object):
                 self.lineEdit_2.setText(_translate("MainWindow", "-"))
                 self.lineEdit_3.setText(_translate("MainWindow", "Sensor Disconnected!"))
                 self.lineEdit_4.setText(QtCore.QDateTime.currentDateTime().toString())
+                self.lineEdit_5.setText(_translate("MainWindow", "-"))
             else:
                 temp1 = '{0:0.1f}* C'.format(temperature)
                 hum1 = '{0:0.1f} %'.format(humidity)
                 self.lineEdit.setText(_translate("MainWindow", temp1))
                 self.lineEdit_2.setText(_translate("MainWindow", hum1))
                 self.lineEdit_3.setText(_translate("MainWindow", "Sensor Connected!"))
-                self.lineEdit_4.setText(QtCore.QDateTime.currentDateTime().toString()) 
-                
-
+                self.lineEdit_4.setText(QtCore.QDateTime.currentDateTime().toString())
+                if temperature > 25 and humidity > 40:
+                    self.lineEdit_5.setText(_translate("MainWindow", "It's hot!"))
+                elif temperature > 25 and humidity < 40:
+                    self.lineEdit_5.setText(_translate("MainWindow", "It's hot and dry!"))
+                elif temperature < 25 and temperature > 15 and humidity < 40:
+                    self.lineEdit_5.setText(_translate("MainWindow", "It's dry!"))
+                elif temperature < 15 and humidity > 40:
+                    self.lineEdit_5.setText(_translate("MainWindow", "It's cold!"))
+                elif temperature < 15 and humidity < 40:
+                    self.lineEdit_5.setText(_translate("MainWindow", "It's cold and dry!"))
+                else:
+                    self.lineEdit_5.setText(_translate("MainWindow", "Don't worry,it's perfect!"))
+            
+      
 
 if __name__ == "__main__":
     import sys
