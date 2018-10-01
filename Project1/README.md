@@ -1,7 +1,7 @@
 Project 1- Local QT based UI by Anay Gondhalekar
 For Course Embedded Interface Design 5053-002 
 
-This project demonstrates development of a rapid prototype of a stand-alone temperature and humidity monitoring device with a local user interface.The project also lets you create the standard class setup for RPi3 and other hardware and system elements, DHT22 Temp/Hum Sensor, Raspbian (Debian) Linux, QT5, Python 3.x and your display (direct OR a laptop via a Remote Desktop or VNC connection)
+This project demonstrates development of a rapid prototype of a stand-alone temperature and humidity monitoring device with a local user interface.The project creates the standard class setup for RPi3 and other hardware and system elements, DHT22 Temp/Hum Sensor, Raspbian (Debian) Linux, QT5, Python 3.x and your display (direct OR a laptop via a Remote Desktop or VNC connection)
 
 Name of Owner: Anay Gondhalekar
 
