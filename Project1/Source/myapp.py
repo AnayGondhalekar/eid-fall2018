@@ -115,6 +115,9 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.lineEdit_5.setFont(font)
         self.lineEdit_5.setObjectName("lineEdit_5")
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setGeometry(QtCore.QRect(140, 90, 101, 31))
+        self.pushButton_2.setObjectName("pushButton_2")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 640, 27))
@@ -126,6 +129,8 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.pushButton.clicked.connect(self.getTempHum)
+        self.pushButton_2.clicked.connect(self.convert)
+        
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -138,6 +143,7 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Last Refreshed at:"))
         self.label_5.setText(_translate("MainWindow", "Anay\'s Temperature & Humidity meter"))
         self.label_6.setText(_translate("MainWindow", "Alarm:"))
+        self.pushButton_2.setText(_translate("MainWindow", "Fah. / Cel. "))
 
     def getTempHum(self):
         _translate = QtCore.QCoreApplication.translate
@@ -192,8 +198,25 @@ class Ui_MainWindow(object):
                     self.lineEdit_5.setText(_translate("MainWindow", "It's cold and dry!"))
                 else:
                     self.lineEdit_5.setText(_translate("MainWindow", "Don't worry,it's perfect!"))
-            
-      
+    
+    def convert(self):
+        _translate = QtCore.QCoreApplication.translate
+        sensor = Adafruit_DHT.DHT22
+        pin = 4
+        humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+        
+        temperature1 = int(temperature) * 9/5.0 + 32
+        temperature1 = '{0:0.1f}* F'.format(temperature1)
+        temperature2 = '{0:0.1f}* C'.format(temperature)
+        value = len(self.lineEdit.text())
+        value1= str(self.lineEdit.text())
+        mychar = value1[value-1]
+        if mychar=='F':
+            self.lineEdit.setText(_translate("MainWindow", temperature2)) 
+        else:
+            self.lineEdit.setText(_translate("MainWindow", temperature1)) 
+        
+           
 
 if __name__ == "__main__":
     import sys
