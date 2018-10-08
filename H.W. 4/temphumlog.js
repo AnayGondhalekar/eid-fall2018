@@ -1,3 +1,9 @@
+//Homework 4 for EID 5053-002
+//Owner:Anay Gondhalekar
+//Node version: v8.12.0
+//Sensor pin Connected to Pin 4
+//Citation: https://www.npmjs.com/package/rpi-dht-sensor, https://github.com/momenso/node-dht-sensor
+//To run: Save this file in the folder bcm2835-1.57 and run with command- sudo node temphumlog.js
 var rpiDhtSensor = require('rpi-dht-sensor'); 
 var dht = new rpiDhtSensor.DHT22(4);  
 var temp_array = new Array();  //array for storing temperature values
